@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B298430201E1FB500785797 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29842F201E1FB500785797 /* MainPageViewController.swift */; };
 		8B557BEB201D1721001FFF25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B557BEA201D1721001FFF25 /* AppDelegate.swift */; };
 		8B557BED201D1721001FFF25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B557BEC201D1721001FFF25 /* ViewController.swift */; };
 		8B557BF0201D1721001FFF25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B557BEE201D1721001FFF25 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		2F1E0E858D33DE2EF6CC9147 /* Pods_ChattingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChattingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B29842F201E1FB500785797 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		8B557BE7201D1721001FFF25 /* ChattingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChattingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B557BEA201D1721001FFF25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B557BEC201D1721001FFF25 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				8B557BEA201D1721001FFF25 /* AppDelegate.swift */,
 				8B557BEC201D1721001FFF25 /* ViewController.swift */,
 				8B557BEE201D1721001FFF25 /* Main.storyboard */,
+				8B29842F201E1FB500785797 /* MainPageViewController.swift */,
 				8B557BF1201D1721001FFF25 /* Assets.xcassets */,
 				8B557BF3201D1721001FFF25 /* LaunchScreen.storyboard */,
 				8B557BFC201D17C0001FFF25 /* GoogleService-Info.plist */,
@@ -185,12 +188,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ChattingApp/Pods-ChattingApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B557BED201D1721001FFF25 /* ViewController.swift in Sources */,
+				8B298430201E1FB500785797 /* MainPageViewController.swift in Sources */,
 				8B557BEB201D1721001FFF25 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

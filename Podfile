@@ -1,4 +1,4 @@
-# Uncomment the next line to define a global platform for your project
+ # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
 target 'ChattingApp' do
@@ -7,5 +7,6 @@ target 'ChattingApp' do
 
   # Pods for ChattingApp
   pod 'Firebase/Core'
-
+  pod 'Firebase/Auth’
+  pod 'Firebase/Database'
 end

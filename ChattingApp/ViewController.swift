@@ -7,19 +7,33 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
+    var ref : DatabaseReference!
 
+    @IBOutlet weak var nameTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        logIn()
+        ref = Database.database().reference()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+  
+    func logIn(){
+        Auth.auth().signInAnonymously { (user, error) in
+            if error != nil {
+                print("Cant log in")
+            } else {
+                print("User id \(user?.uid)")
+            }
+        }
     }
-
+    @IBAction func sendButton(_ sender: Any) {
+        var dic : [String:Any] = ["text" : nameTextField.text! , "name" : "Mohammed" , "postDate" : ServerValue.timestamp() ]
+        self.ref.child("chat").childByAutoId().setValue(dic)
+    }
+    
 
 }
 
