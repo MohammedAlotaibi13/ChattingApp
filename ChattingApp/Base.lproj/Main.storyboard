@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oB3-P3-tDI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aY8-xv-I2t">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,102 +9,94 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="ArialBoldItalic.ttf">
-            <string>Arial-BoldItalicMT</string>
-        </array>
-    </customFonts>
     <scenes>
-        <!--Main Page View Controller-->
-        <scene sceneID="QM2-il-QJa">
+        <!--Log In View Controller-->
+        <scene sceneID="FFW-X8-K8d">
             <objects>
-                <viewController id="oB3-P3-tDI" customClass="MainPageViewController" customModule="ChattingApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Icb-E9-k03">
+                <viewController id="aY8-xv-I2t" customClass="LogInViewController" customModule="ChattingApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0bi-KK-fIz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kKw-vF-n7a">
-                                <rect key="frame" x="16" y="128" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RY5-fO-Wrx">
-                                <rect key="frame" x="148" y="242" width="78" height="30"/>
-                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundPhoto.png" translatesAutoresizingMaskIntoConstraints="NO" id="dAk-eY-gZ0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOJ-Te-8zj" userLabel="Log in">
+                                <rect key="frame" x="73" y="286" width="229" height="34"/>
+                                <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="78" id="UMc-OE-WoS"/>
-                                    <constraint firstAttribute="height" constant="30" id="vbd-mv-GT1"/>
+                                    <constraint firstAttribute="width" constant="229" id="8pP-NK-ELv"/>
+                                    <constraint firstAttribute="height" constant="34" id="Iat-cG-lRc"/>
                                 </constraints>
-                                <state key="normal" title="Start">
-                                    <color key="titleColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Login Anonymously">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="startButton:" destination="oB3-P3-tDI" eventType="touchUpInside" id="w3U-hM-y8o"/>
+                                    <action selector="loginAnonmously:" destination="aY8-xv-I2t" eventType="touchUpInside" id="nbK-f1-0Jp"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chatting App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZoY-bm-Yn2">
-                                <rect key="frame" x="16" y="39" width="343" height="34"/>
-                                <fontDescription key="fontDescription" name="Arial-BoldItalicMT" family="Arial" pointSize="30"/>
-                                <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OrLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="McU-UR-8kv">
+                                <rect key="frame" x="73" y="349" width="229" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="NOd-WJ-rzN"/>
+                                    <constraint firstAttribute="width" constant="229" id="TpY-QZ-jqw"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOt-Uw-MUp">
+                                <rect key="frame" x="163" y="414" width="49" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="AoP-Eq-lt9"/>
+                                    <constraint firstAttribute="height" constant="40" id="GGb-q2-DqN"/>
+                                </constraints>
+                                <state key="normal" image="googleButton.png"/>
+                                <connections>
+                                    <action selector="googleLogin:" destination="aY8-xv-I2t" eventType="touchUpInside" id="UIu-PG-97k"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.25251677849999998" green="0.80686346480000004" blue="0.91432466440000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ZoY-bm-Yn2" firstAttribute="leading" secondItem="WgY-Ol-tB8" secondAttribute="leading" constant="16" id="2cb-La-zXh"/>
-                            <constraint firstItem="WgY-Ol-tB8" firstAttribute="trailing" secondItem="kKw-vF-n7a" secondAttribute="trailing" constant="16" id="39r-6L-aOB"/>
-                            <constraint firstItem="kKw-vF-n7a" firstAttribute="leading" secondItem="WgY-Ol-tB8" secondAttribute="leading" constant="16" id="Dj0-99-7Tq"/>
-                            <constraint firstItem="RY5-fO-Wrx" firstAttribute="leading" secondItem="WgY-Ol-tB8" secondAttribute="leading" constant="148" id="H8M-8D-ToW"/>
-                            <constraint firstItem="kKw-vF-n7a" firstAttribute="top" secondItem="ZoY-bm-Yn2" secondAttribute="bottom" constant="55" id="KoW-5x-lUB"/>
-                            <constraint firstItem="WgY-Ol-tB8" firstAttribute="trailing" secondItem="ZoY-bm-Yn2" secondAttribute="trailing" constant="16" id="g4V-5h-5Ew"/>
-                            <constraint firstItem="RY5-fO-Wrx" firstAttribute="top" secondItem="kKw-vF-n7a" secondAttribute="bottom" constant="84" id="oOc-I0-PyV"/>
-                            <constraint firstItem="ZoY-bm-Yn2" firstAttribute="top" secondItem="WgY-Ol-tB8" secondAttribute="top" constant="19" id="zG9-zf-ARh"/>
+                            <constraint firstItem="McU-UR-8kv" firstAttribute="centerX" secondItem="0bi-KK-fIz" secondAttribute="centerX" id="BxN-au-SnJ"/>
+                            <constraint firstItem="EOt-Uw-MUp" firstAttribute="centerX" secondItem="0bi-KK-fIz" secondAttribute="centerX" id="I4G-gy-Qah"/>
+                            <constraint firstItem="McU-UR-8kv" firstAttribute="top" secondItem="WOJ-Te-8zj" secondAttribute="bottom" constant="29" id="LL7-6m-nbb"/>
+                            <constraint firstItem="dAk-eY-gZ0" firstAttribute="leading" secondItem="SHC-fU-DaK" secondAttribute="leading" id="c8z-IM-SgN"/>
+                            <constraint firstItem="WOJ-Te-8zj" firstAttribute="centerX" secondItem="0bi-KK-fIz" secondAttribute="centerX" id="dlY-XP-OAd"/>
+                            <constraint firstItem="dAk-eY-gZ0" firstAttribute="top" secondItem="0bi-KK-fIz" secondAttribute="top" id="jfb-cs-xY0"/>
+                            <constraint firstItem="EOt-Uw-MUp" firstAttribute="top" secondItem="McU-UR-8kv" secondAttribute="bottom" constant="20" id="lZq-pX-mqw"/>
+                            <constraint firstItem="dAk-eY-gZ0" firstAttribute="trailing" secondItem="SHC-fU-DaK" secondAttribute="trailing" id="qa8-ZT-xL0"/>
+                            <constraint firstItem="SHC-fU-DaK" firstAttribute="bottom" secondItem="EOt-Uw-MUp" secondAttribute="bottom" constant="213" id="u1f-Xf-UIR"/>
+                            <constraint firstItem="dAk-eY-gZ0" firstAttribute="bottom" secondItem="SHC-fU-DaK" secondAttribute="bottom" id="zly-FY-S0R"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="WgY-Ol-tB8"/>
+                        <viewLayoutGuide key="safeArea" id="SHC-fU-DaK"/>
                     </view>
                     <connections>
-                        <outlet property="userNameTextField" destination="kKw-vF-n7a" id="LYN-hz-qix"/>
+                        <outlet property="anonymousButton" destination="WOJ-Te-8zj" id="bQw-xS-xN5"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uhf-S6-Maa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E36-4c-bGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-631.20000000000005" y="94.902548725637189"/>
+            <point key="canvasLocation" x="-341.60000000000002" y="75.112443778110944"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Chatting Room View Controller-->
+        <scene sceneID="iou-5F-FRC">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ChattingApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="C3v-hy-WVH" customClass="ChattingRoomViewController" customModule="ChattingApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="svb-rF-VUC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cNm-zf-5nS">
-                                <rect key="frame" x="61" y="75" width="253" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCb-Ca-ZL9">
-                                <rect key="frame" x="164" y="169" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send"/>
-                                <connections>
-                                    <action selector="sendButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gxa-wG-CBc"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="b0V-Nf-b2D"/>
                     </view>
-                    <connections>
-                        <outlet property="nameTextField" destination="cNm-zf-5nS" id="Bjv-Ns-3Kt"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Er5-29-8h5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="94.902548725637189"/>
+            <point key="canvasLocation" x="404" y="75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="OrLine.png" width="864" height="45"/>
+        <image name="backgroundPhoto.png" width="1125" height="2001"/>
+        <image name="googleButton.png" width="120" height="120"/>
+    </resources>
 </document>

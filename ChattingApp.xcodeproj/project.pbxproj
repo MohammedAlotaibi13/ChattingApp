@@ -7,27 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B298430201E1FB500785797 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29842F201E1FB500785797 /* MainPageViewController.swift */; };
+		8B298430201E1FB500785797 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29842F201E1FB500785797 /* LogInViewController.swift */; };
 		8B557BEB201D1721001FFF25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B557BEA201D1721001FFF25 /* AppDelegate.swift */; };
-		8B557BED201D1721001FFF25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B557BEC201D1721001FFF25 /* ViewController.swift */; };
+		8B557BED201D1721001FFF25 /* ChattingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B557BEC201D1721001FFF25 /* ChattingRoomViewController.swift */; };
 		8B557BF0201D1721001FFF25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B557BEE201D1721001FFF25 /* Main.storyboard */; };
 		8B557BF2201D1721001FFF25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B557BF1201D1721001FFF25 /* Assets.xcassets */; };
 		8B557BF5201D1721001FFF25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B557BF3201D1721001FFF25 /* LaunchScreen.storyboard */; };
 		8B557BFD201D17C0001FFF25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B557BFC201D17C0001FFF25 /* GoogleService-Info.plist */; };
+		8BAF2F8C202419A1006F6E83 /* Resources-GoChat in Resources */ = {isa = PBXBuildFile; fileRef = 8BAF2F8B202419A1006F6E83 /* Resources-GoChat */; };
 		DFDF8E0D9ABF03AAF99A1743 /* Pods_ChattingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1E0E858D33DE2EF6CC9147 /* Pods_ChattingApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2F1E0E858D33DE2EF6CC9147 /* Pods_ChattingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChattingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B29842F201E1FB500785797 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		8B29842F201E1FB500785797 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		8B557BE7201D1721001FFF25 /* ChattingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChattingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B557BEA201D1721001FFF25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8B557BEC201D1721001FFF25 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8B557BEC201D1721001FFF25 /* ChattingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRoomViewController.swift; sourceTree = "<group>"; };
 		8B557BEF201D1721001FFF25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B557BF1201D1721001FFF25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B557BF4201D1721001FFF25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B557BF6201D1721001FFF25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B557BFC201D17C0001FFF25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8BAF2F8B202419A1006F6E83 /* Resources-GoChat */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Resources-GoChat"; sourceTree = "<group>"; };
 		C54EAE5CCFC9A6FF7DEBC63C /* Pods-ChattingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChattingApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChattingApp/Pods-ChattingApp.release.xcconfig"; sourceTree = "<group>"; };
 		D5F729845AE1CA45532625D8 /* Pods-ChattingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChattingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChattingApp/Pods-ChattingApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,9 +76,10 @@
 			isa = PBXGroup;
 			children = (
 				8B557BEA201D1721001FFF25 /* AppDelegate.swift */,
-				8B557BEC201D1721001FFF25 /* ViewController.swift */,
+				8B557BEC201D1721001FFF25 /* ChattingRoomViewController.swift */,
 				8B557BEE201D1721001FFF25 /* Main.storyboard */,
-				8B29842F201E1FB500785797 /* MainPageViewController.swift */,
+				8B29842F201E1FB500785797 /* LogInViewController.swift */,
+				8BAF2F8B202419A1006F6E83 /* Resources-GoChat */,
 				8B557BF1201D1721001FFF25 /* Assets.xcassets */,
 				8B557BF3201D1721001FFF25 /* LaunchScreen.storyboard */,
 				8B557BFC201D17C0001FFF25 /* GoogleService-Info.plist */,
@@ -156,6 +159,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BAF2F8C202419A1006F6E83 /* Resources-GoChat in Resources */,
 				8B557BFD201D17C0001FFF25 /* GoogleService-Info.plist in Resources */,
 				8B557BF5201D1721001FFF25 /* LaunchScreen.storyboard in Resources */,
 				8B557BF2201D1721001FFF25 /* Assets.xcassets in Resources */,
@@ -230,8 +234,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B557BED201D1721001FFF25 /* ViewController.swift in Sources */,
-				8B298430201E1FB500785797 /* MainPageViewController.swift in Sources */,
+				8B557BED201D1721001FFF25 /* ChattingRoomViewController.swift in Sources */,
+				8B298430201E1FB500785797 /* LogInViewController.swift in Sources */,
 				8B557BEB201D1721001FFF25 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
