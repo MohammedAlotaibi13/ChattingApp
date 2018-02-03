@@ -40,6 +40,7 @@ class ChattingRoomViewController: JSQMessagesViewController {
     }
     override func didPressAccessoryButton(_ sender: UIButton!) {
         let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -64,5 +65,16 @@ class ChattingRoomViewController: JSQMessagesViewController {
  
     
 
+}
+extension ChattingRoomViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print("did finish picking media eith info ")
+        let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let photp = JSQPhotoMediaItem(image: image)
+        // get image
+        messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: photp ))
+        dismiss(animated: true, completion: nil)
+        collectionView.reloadData()
+    }
 }
 
