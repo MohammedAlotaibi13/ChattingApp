@@ -24,6 +24,11 @@ PODS:
     - FirebaseCore (~> 4.0)
     - leveldb-library (~> 1.18)
   - FirebaseInstanceID (2.0.6)
+  - GoogleSignIn (4.1.1):
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleToolboxForMac/DebugUtils (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/Defines (2.1.3)
@@ -34,7 +39,16 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.3)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
+  - GTMOAuth2 (1.1.5):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.12):
+    - GTMSessionFetcher/Full (= 1.1.12)
   - GTMSessionFetcher/Core (1.1.12)
+  - GTMSessionFetcher/Full (1.1.12):
+    - GTMSessionFetcher/Core (= 1.1.12)
+  - JSQMessagesViewController (7.3.5):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -46,6 +60,8 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - GoogleSignIn
+  - JSQMessagesViewController
 
 SPEC CHECKSUMS:
   Firebase: 27321a925aa85520618255a7c630859e0502ccbd
@@ -54,11 +70,15 @@ SPEC CHECKSUMS:
   FirebaseCore: 2a946ece8fbe3ce1fdeeb55324f273caade22df9
   FirebaseDatabase: 2e6e8e110b93b9a6e7aac71774c769a363035cb1
   FirebaseInstanceID: 24958382a1011bba5aaff37e334e7a650b9118f5
+  GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   leveldb-library: 4f9eedf84ab46b4fa3b7893bf30714b2a1a74022
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: eac94f64bad937bb3b6b819014b94d97834d64f1
+PODFILE CHECKSUM: 170b047959a7422677a07006290cf692414d5de9
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

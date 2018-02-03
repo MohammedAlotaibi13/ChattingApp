@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import FirebaseAuth
+import GoogleSignIn
 
-class  LogInViewController: UIViewController {
+class  LogInViewController: UIViewController , GIDSignInUIDelegate , GIDSignInDelegate {
 
     @IBOutlet weak var anonymousButton: UIButton!
     
@@ -17,14 +19,33 @@ class  LogInViewController: UIViewController {
         // design border of anonymously login
         anonymousButton.layer.borderWidth = 2.0
         anonymousButton.layer.borderColor = UIColor.white.cgColor
+        // google SignIn
+        GIDSignIn.sharedInstance().uiDelegate = self
+         GIDSignIn.sharedInstance().delegate = self
 
     }
 
     @IBAction func loginAnonmously(_ sender: Any) {
+        // log in anonymously
+        Helper.helper.loginAnonmously()
+ 
+        
     }
     
     
     @IBAction func googleLogin(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()
+    
     }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        } else {
+            Helper.helper.signInWithGoogle(authentication: user.authentication)
+        }
+    }
+    
     
 }

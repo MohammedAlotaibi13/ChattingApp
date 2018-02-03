@@ -15,6 +15,7 @@
 		8B557BF5201D1721001FFF25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B557BF3201D1721001FFF25 /* LaunchScreen.storyboard */; };
 		8B557BFD201D17C0001FFF25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B557BFC201D17C0001FFF25 /* GoogleService-Info.plist */; };
 		8BAF2F8C202419A1006F6E83 /* Resources-GoChat in Resources */ = {isa = PBXBuildFile; fileRef = 8BAF2F8B202419A1006F6E83 /* Resources-GoChat */; };
+		8BAF2F8E2024D700006F6E83 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAF2F8D2024D700006F6E83 /* Helper.swift */; };
 		DFDF8E0D9ABF03AAF99A1743 /* Pods_ChattingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1E0E858D33DE2EF6CC9147 /* Pods_ChattingApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		8B557BF6201D1721001FFF25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B557BFC201D17C0001FFF25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8BAF2F8B202419A1006F6E83 /* Resources-GoChat */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Resources-GoChat"; sourceTree = "<group>"; };
+		8BAF2F8D2024D700006F6E83 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		C54EAE5CCFC9A6FF7DEBC63C /* Pods-ChattingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChattingApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChattingApp/Pods-ChattingApp.release.xcconfig"; sourceTree = "<group>"; };
 		D5F729845AE1CA45532625D8 /* Pods-ChattingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChattingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChattingApp/Pods-ChattingApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				8B557BEA201D1721001FFF25 /* AppDelegate.swift */,
+				8BAF2F8D2024D700006F6E83 /* Helper.swift */,
 				8B557BEC201D1721001FFF25 /* ChattingRoomViewController.swift */,
 				8B557BEE201D1721001FFF25 /* Main.storyboard */,
 				8B29842F201E1FB500785797 /* LogInViewController.swift */,
@@ -176,9 +179,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ChattingApp/Pods-ChattingApp-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -192,15 +198,21 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ChattingApp/Pods-ChattingApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -237,6 +249,7 @@
 				8B557BED201D1721001FFF25 /* ChattingRoomViewController.swift in Sources */,
 				8B298430201E1FB500785797 /* LogInViewController.swift in Sources */,
 				8B557BEB201D1721001FFF25 /* AppDelegate.swift in Sources */,
+				8BAF2F8E2024D700006F6E83 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
