@@ -20,11 +20,35 @@ class ChattingRoomViewController: JSQMessagesViewController {
         ref = Database.database().reference()
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
+        return messages[indexPath.row]
+    }
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
+        let bubbleFactory = JSQMessagesBubbleImageFactory()
+        return bubbleFactory?.outgoingMessagesBubbleImage(with: .black)
+    }
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
+        return nil
+    }
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-        print("hi")
+        print(senderId)
+        print(senderDisplayName)
+        print(text)
+        messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text))
+        collectionView.reloadData()
+        print(messages)
     }
     override func didPressAccessoryButton(_ sender: UIButton!) {
-        print("hi again")
+        let imagePicker = UIImagePickerController()
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+        return cell
     }
     @IBAction func logOutButton(_ sender: Any) {
         //switch to LogIn page
