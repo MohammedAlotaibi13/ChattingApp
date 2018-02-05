@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import JSQMessagesViewController
+import MobileCoreServices
+import AVKit
 class ChattingRoomViewController: JSQMessagesViewController {
     var ref : DatabaseReference!
     var messages = [JSQMessage]()
@@ -39,10 +41,28 @@ class ChattingRoomViewController: JSQMessagesViewController {
         print(messages)
     }
     override func didPressAccessoryButton(_ sender: UIButton!) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        self.present(imagePicker, animated: true, completion: nil)
+        let sheet = UIAlertController(title: "Medai", message: "Please Select a Media", preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let photo = UIAlertAction(title: "Photo Library", style: .default) { (UIAlertAction) in
+            self.getMediaFrom(kUTTypeImage)
+        }
+        let video = UIAlertAction(title: "Vide Library", style: .default) { (UIAlertAction) in
+             self.getMediaFrom(kUTTypeMovie)
+        }
+        sheet.addAction(cancel)
+        sheet.addAction(video)
+        sheet.addAction(photo)
+        self.present(sheet, animated: true, completion: nil)
     }
+    
+    func getMediaFrom(_ type: CFString) {
+        print(type)
+        let mediaPicker = UIImagePickerController()
+        mediaPicker.delegate = self
+        mediaPicker.mediaTypes = [type as String]
+        self.present(mediaPicker, animated: true, completion: nil)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
     }
@@ -50,6 +70,17 @@ class ChattingRoomViewController: JSQMessagesViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         return cell
+    }
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAt indexPath: IndexPath!) {
+        let message = messages[indexPath.item]
+        if message.isMediaMessage {
+            if let mediaItem = message.media as? JSQVideoMediaItem {
+                let player = AVPlayer(url: mediaItem.fileURL)
+                let playerVC = AVPlayerViewController()
+                playerVC.player = player
+                self.present(playerVC, animated: true, completion: nil)
+            }
+        }
     }
     @IBAction func logOutButton(_ sender: Any) {
         //switch to LogIn page
@@ -69,10 +100,14 @@ class ChattingRoomViewController: JSQMessagesViewController {
 extension ChattingRoomViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("did finish picking media eith info ")
-        let image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        let photp = JSQPhotoMediaItem(image: image)
-        // get image
-        messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: photp ))
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let photp = JSQPhotoMediaItem(image: image)
+            // get image
+            messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: photp ))
+        } else if let video = info[UIImagePickerControllerMediaURL] as? URL {
+            let videoItem = JSQVideoMediaItem(fileURL: video, isReadyToPlay: true)
+            messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: videoItem))
+        }
         dismiss(animated: true, completion: nil)
         collectionView.reloadData()
     }
