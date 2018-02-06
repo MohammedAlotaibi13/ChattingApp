@@ -12,14 +12,36 @@ import JSQMessagesViewController
 import MobileCoreServices
 import AVKit
 class ChattingRoomViewController: JSQMessagesViewController {
-    var ref : DatabaseReference!
+  //  var ref : DatabaseReference!
     var messages = [JSQMessage]()
+    var messageRef = Database.database().reference().child("messages")
    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.senderId = "1"
         self.senderDisplayName = "mohammed"
-        ref = Database.database().reference()
+   //     ref = Database.database().reference()
+      //  let message = ref.child("messages")
+       // message.childByAutoId().setValue("hello there")
+   //     ref.observe(DataEventType.value) { (snapShot) in
+    //        print(snapShot.value)
+            
+    //    }
+        observerMessages()
+        
+    }
+    
+    func observerMessages(){
+        messageRef.observe(DataEventType.childAdded) { (snapShot) in
+            if let dic = snapShot.value as? [String : AnyObject] {
+                let mediaType = dic["Media"] as? String
+                let senderId = dic["senderId"] as? String
+                let displayName = dic["senderDisplayName"] as? String
+                let text = dic["text"] as? String
+                self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, text: text))
+                self.collectionView.reloadData()
+            }
+        }
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
@@ -33,12 +55,15 @@ class ChattingRoomViewController: JSQMessagesViewController {
         return nil
     }
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-        print(senderId)
+        let newmessages = messageRef.childByAutoId()
+        let messageData = ["text" : text , "senderId" : senderId , "senderDisplayName" : senderDisplayName , "Media" : "TEXT"]
+        newmessages.setValue(messageData)
+      /*  print(senderId)
         print(senderDisplayName)
         print(text)
         messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text))
         collectionView.reloadData()
-        print(messages)
+        print(messages)*/
     }
     override func didPressAccessoryButton(_ sender: UIButton!) {
         let sheet = UIAlertController(title: "Medai", message: "Please Select a Media", preferredStyle: .actionSheet)
