@@ -37,8 +37,15 @@ class ChattingRoomViewController: JSQMessagesViewController {
                 let mediaType = dic["Media"] as? String
                 let senderId = dic["senderId"] as? String
                 let displayName = dic["senderDisplayName"] as? String
-                let text = dic["text"] as? String
-                self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, text: text))
+                if let text = dic["text"] as? String {
+                    self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, text: text))
+                } else {
+                    let fileUrl = dic["FileUrl"] as? String
+                    let data = NSData(contentsOf: URL(string: fileUrl!)!)
+                    let picture = UIImage(data: data! as Data)
+                    let photo = JSQPhotoMediaItem(image: picture)
+                    self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, media: photo))
+                }
                 self.collectionView.reloadData()
             }
         }
