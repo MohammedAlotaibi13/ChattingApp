@@ -11,4 +11,5 @@ target 'ChattingApp' do
   pod 'Firebase/Database'
   pod 'GoogleSignIn'
   pod 'JSQMessagesViewController'
+  pod 'Firebase/Storage'
 end

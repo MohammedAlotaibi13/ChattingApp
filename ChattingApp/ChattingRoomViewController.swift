@@ -11,6 +11,8 @@ import Firebase
 import JSQMessagesViewController
 import MobileCoreServices
 import AVKit
+import FirebaseStorage
+import FirebaseAuth
 class ChattingRoomViewController: JSQMessagesViewController {
   //  var ref : DatabaseReference!
     var messages = [JSQMessage]()
@@ -20,14 +22,8 @@ class ChattingRoomViewController: JSQMessagesViewController {
         super.viewDidLoad()
         self.senderId = "1"
         self.senderDisplayName = "mohammed"
-   //     ref = Database.database().reference()
-      //  let message = ref.child("messages")
-       // message.childByAutoId().setValue("hello there")
-   //     ref.observe(DataEventType.value) { (snapShot) in
-    //        print(snapShot.value)
-            
-    //    }
-        observerMessages()
+
+      //  observerMessages()
         
     }
     
@@ -123,22 +119,53 @@ class ChattingRoomViewController: JSQMessagesViewController {
         appDelgate.window?.rootViewController = logInController
     }
     
+    func sendMedia(picture: UIImage? , video : URL?){
+        if let picture = picture {
+        let filePath = "\(Auth.auth().currentUser!.uid)/\(NSDate.timeIntervalSinceReferenceDate)"
+        print(filePath)
+        let data = UIImageJPEGRepresentation(picture, 0.1)
+        let metadata = StorageMetadata()
+        metadata.contentType = "Image/jpg"
+        Storage.storage().reference().child(filePath).putData(data!, metadata: metadata) { (mediaData, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+          let fileUrl = mediaData!.downloadURLs![0].absoluteString
+            let newMessage = self.messageRef.childByAutoId()
+            let messageData = ["fileUrl" : fileUrl , "senderId" : self.senderId , "senderDisplayName" : self.senderDisplayName , "Media" : "PHOTO"]
+            newMessage.setValue(messageData)
+        }
+        } else if let video = video {
+            let filePath = "\(Auth.auth().currentUser?.uid)/\(NSDate.timeIntervalSinceReferenceDate)"
+            print(filePath)
+            let data = NSData(contentsOf: video)
+            let metadata = StorageMetadata()
+            metadata.contentType = "Video"
+            Storage.storage().reference().child(filePath).putData(data! as Data, metadata: metadata) { (mediaData, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+                let fileUrl = mediaData!.downloadURLs![0].absoluteString
+                let newMessage = self.messageRef.childByAutoId()
+                let messageData = ["fileUrl" : fileUrl , "senderId" : self.senderId , "senderDisplayName" : self.senderDisplayName , "Media" : "Video"]
+                newMessage.setValue(messageData)
+            }
+        }
+    }
     
-  
- 
-    
-
 }
 extension ChattingRoomViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("did finish picking media eith info ")
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let photp = JSQPhotoMediaItem(image: image)
+            let photo = JSQPhotoMediaItem(image: image)
             // get image
-            messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: photp ))
+            messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: photo ))
+            sendMedia(picture: image, video: nil)
         } else if let video = info[UIImagePickerControllerMediaURL] as? URL {
             let videoItem = JSQVideoMediaItem(fileURL: video, isReadyToPlay: true)
             messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: videoItem))
+            sendMedia(picture: nil, video: video)
         }
         dismiss(animated: true, completion: nil)
         collectionView.reloadData()
