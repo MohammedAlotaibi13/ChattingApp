@@ -9,7 +9,6 @@
 import UIKit
 import FirebaseAuth
 import GoogleSignIn
-
 class  LogInViewController: UIViewController , GIDSignInUIDelegate , GIDSignInDelegate {
 
     @IBOutlet weak var anonymousButton: UIButton!
@@ -24,18 +23,28 @@ class  LogInViewController: UIViewController , GIDSignInUIDelegate , GIDSignInDe
          GIDSignIn.sharedInstance().delegate = self
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(Auth.auth().currentUser)
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user != nil {
+                print(user)
+                Helper.helper.switchToChatController()
+            } else {
+                print("no user found")
+            }
+        }
+    }
 
     @IBAction func loginAnonmously(_ sender: Any) {
         // log in anonymously
         Helper.helper.loginAnonmously()
- 
-        
     }
     
     
     @IBAction func googleLogin(_ sender: Any) {
         GIDSignIn.sharedInstance().signIn()
-    
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {

@@ -46,7 +46,7 @@ class Helper {
         }
     }
     
-    private func switchToChatController(){
+    func switchToChatController(){
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationC = storyBoard.instantiateViewController(withIdentifier: "NavigationController") as! UINavigationController
         // access to windo in AppDelgate
