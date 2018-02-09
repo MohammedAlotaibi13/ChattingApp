@@ -23,25 +23,35 @@ class ChattingRoomViewController: JSQMessagesViewController {
         self.senderId = "1"
         self.senderDisplayName = "mohammed"
 
-      //  observerMessages()
-        
+        observerMessages()
     }
     
     func observerMessages(){
         messageRef.observe(DataEventType.childAdded) { (snapShot) in
             if let dic = snapShot.value as? [String : AnyObject] {
-                let mediaType = dic["Media"] as? String
-                let senderId = dic["senderId"] as? String
+                let mediaType = dic["Media"] as! String
+                let senderId = dic["senderId"] as! String
                 let displayName = dic["senderDisplayName"] as? String
-                if let text = dic["text"] as? String {
+                
+                switch mediaType {
+                case "TEXT" :
+                    let text = dic["text"] as? String
                     self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, text: text))
-                } else {
-                    let fileUrl = dic["FileUrl"] as? String
-                    let data = NSData(contentsOf: URL(string: fileUrl!)!)
-                    let picture = UIImage(data: data! as Data)
-                    let photo = JSQPhotoMediaItem(image: picture)
-                    self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, media: photo))
+                case "PHOTO":
+                let fileUrl = dic["fileUrl"] as? String
+                let data = NSData(contentsOf: URL(string: fileUrl!)!)
+                let picture = UIImage(data: data! as Data)
+                let photo = JSQPhotoMediaItem(image: picture)
+                self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, media: photo))
+                case "Video":
+                let fileUrl = dic["fileUrl"] as? String
+                let data = URL(string: fileUrl!)
+                let video = JSQVideoMediaItem(fileURL: data, isReadyToPlay: true)
+                self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, media: video))
+                default:
+                    print("no mediaType found")
                 }
+                
                 self.collectionView.reloadData()
             }
         }
@@ -61,12 +71,7 @@ class ChattingRoomViewController: JSQMessagesViewController {
         let newmessages = messageRef.childByAutoId()
         let messageData = ["text" : text , "senderId" : senderId , "senderDisplayName" : senderDisplayName , "Media" : "TEXT"]
         newmessages.setValue(messageData)
-      /*  print(senderId)
-        print(senderDisplayName)
-        print(text)
-        messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text))
-        collectionView.reloadData()
-        print(messages)*/
+      
     }
     override func didPressAccessoryButton(_ sender: UIButton!) {
         let sheet = UIAlertController(title: "Medai", message: "Please Select a Media", preferredStyle: .actionSheet)
@@ -112,6 +117,11 @@ class ChattingRoomViewController: JSQMessagesViewController {
     }
     @IBAction func logOutButton(_ sender: Any) {
         //switch to LogIn page
+        do {
+              Auth.auth().signOut()
+        } catch {
+            print(error.localizedDescription)
+        }
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let logInController = storyBoard.instantiateViewController(withIdentifier: "LogInViewController") as! LogInViewController
         // access to windo in AppDelgate
