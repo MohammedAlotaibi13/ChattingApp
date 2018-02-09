@@ -118,10 +118,11 @@ class ChattingRoomViewController: JSQMessagesViewController {
     @IBAction func logOutButton(_ sender: Any) {
         //switch to LogIn page
         do {
-              Auth.auth().signOut()
+           try   Auth.auth().signOut()
         } catch {
             print(error.localizedDescription)
         }
+        print(Auth.auth().currentUser)
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let logInController = storyBoard.instantiateViewController(withIdentifier: "LogInViewController") as! LogInViewController
         // access to windo in AppDelgate
