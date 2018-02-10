@@ -20,7 +20,8 @@ class ChattingRoomViewController: JSQMessagesViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.senderId = "1"
+        let current = Auth.auth().currentUser
+        self.senderId = current?.uid
         self.senderDisplayName = "mohammed"
 
         observerMessages()
@@ -43,11 +44,21 @@ class ChattingRoomViewController: JSQMessagesViewController {
                 let picture = UIImage(data: data! as Data)
                 let photo = JSQPhotoMediaItem(image: picture)
                 self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, media: photo))
+                if self.senderId == senderId {
+                    photo?.appliesMediaViewMaskAsOutgoing = true
+                } else {
+                    photo?.appliesMediaViewMaskAsOutgoing = false 
+                    }
                 case "Video":
                 let fileUrl = dic["fileUrl"] as? String
                 let data = URL(string: fileUrl!)
                 let video = JSQVideoMediaItem(fileURL: data, isReadyToPlay: true)
                 self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, media: video))
+                if self.senderId == senderId {
+                    video?.appliesMediaViewMaskAsOutgoing = true
+                } else {
+                    video?.appliesMediaViewMaskAsOutgoing = false
+                    }
                 default:
                     print("no mediaType found")
                 }
@@ -61,9 +72,15 @@ class ChattingRoomViewController: JSQMessagesViewController {
         return messages[indexPath.row]
     }
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
+        let message = messages[indexPath.item]
         let bubbleFactory = JSQMessagesBubbleImageFactory()
+        if message.senderId == self.senderId {
         return bubbleFactory?.outgoingMessagesBubbleImage(with: .black)
+        } else {
+            return bubbleFactory?.incomingMessagesBubbleImage(with: .blue)
+        }
     }
+        
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         return nil
     }
@@ -71,6 +88,7 @@ class ChattingRoomViewController: JSQMessagesViewController {
         let newmessages = messageRef.childByAutoId()
         let messageData = ["text" : text , "senderId" : senderId , "senderDisplayName" : senderDisplayName , "Media" : "TEXT"]
         newmessages.setValue(messageData)
+        self.finishSendingMessage()
       
     }
     override func didPressAccessoryButton(_ sender: UIButton!) {
@@ -169,13 +187,8 @@ extension ChattingRoomViewController : UIImagePickerControllerDelegate , UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("did finish picking media eith info ")
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let photo = JSQPhotoMediaItem(image: image)
-            // get image
-            messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: photo ))
             sendMedia(picture: image, video: nil)
         } else if let video = info[UIImagePickerControllerMediaURL] as? URL {
-            let videoItem = JSQVideoMediaItem(fileURL: video, isReadyToPlay: true)
-            messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, media: videoItem))
             sendMedia(picture: nil, video: video)
         }
         dismiss(animated: true, completion: nil)
