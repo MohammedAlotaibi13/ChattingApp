@@ -13,6 +13,7 @@ import MobileCoreServices
 import AVKit
 import FirebaseStorage
 import FirebaseAuth
+import SDWebImage
 class ChattingRoomViewController: JSQMessagesViewController {
   //  var ref : DatabaseReference!
     var messages = [JSQMessage]()
@@ -64,10 +65,18 @@ class ChattingRoomViewController: JSQMessagesViewController {
                     let text = dic["text"] as? String
                     self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, text: text))
                 case "PHOTO":
-                let fileUrl = dic["fileUrl"] as? String
-                let data = NSData(contentsOf: URL(string: fileUrl!)!)
-                let picture = UIImage(data: data! as Data)
-                let photo = JSQPhotoMediaItem(image: picture)
+                let fileUrl = dic["fileUrl"] as! String
+                let photo = JSQPhotoMediaItem(image: nil)
+                let downloder = SDWebImageDownloader.shared()
+                downloder.downloadImage(with: URL(string: fileUrl)!, options: [], progress: nil, completed: { (image, data, error, finish) in
+                    DispatchQueue.main.async {
+                        photo?.image = image
+                        self.collectionView.reloadData()
+                    }
+                })
+              
+              //  let data = NSData(contentsOf: URL(string: fileUrl)!)
+               // let picture = UIImage(data: data! as Data)
                 self.messages.append(JSQMessage(senderId: senderId, displayName: displayName, media: photo))
                 if self.senderId == senderId {
                     photo?.appliesMediaViewMaskAsOutgoing = true

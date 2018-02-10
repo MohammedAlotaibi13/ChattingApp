@@ -12,4 +12,5 @@ target 'ChattingApp' do
   pod 'GoogleSignIn'
   pod 'JSQMessagesViewController'
   pod 'Firebase/Storage'
+  pod 'SDWebImage'
 end
