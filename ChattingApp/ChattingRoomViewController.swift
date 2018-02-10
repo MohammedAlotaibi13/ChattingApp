@@ -16,23 +16,48 @@ import FirebaseAuth
 class ChattingRoomViewController: JSQMessagesViewController {
   //  var ref : DatabaseReference!
     var messages = [JSQMessage]()
+    var avatarDic = [String : JSQMessagesAvatarImage]()
     var messageRef = Database.database().reference().child("messages")
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let current = Auth.auth().currentUser
-        self.senderId = current?.uid
-        self.senderDisplayName = "mohammed"
-
+        if  let current = Auth.auth().currentUser{
+        self.senderId = current.uid
+            if current.isAnonymous == true {
+                self.senderDisplayName = "Anonymous"
+            } else {
+        self.senderDisplayName = "\(current.displayName!)"
+        }
+        }
         observerMessages()
     }
-    
+    func observeUser(id : String){
+        Database.database().reference().child("Users").child(id).observe(DataEventType.value) { (snapShot) in
+            if let dic = snapShot.value as? [String : AnyObject] {
+                let avatarUrl = dic["photoUrl"] as! String
+                self.setAvatar(avatarUrl , messageId : id)
+            }
+        }
+    }
+    func setAvatar(_ url: String, messageId : String){
+        if url != "" {
+            let fileUrl = URL(string: url)
+            let data = NSData(contentsOf: fileUrl!)
+            let image = UIImage(data: data! as Data)
+            let userPic = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: 30)
+            avatarDic[messageId] = userPic
+        } else {
+            avatarDic[messageId] = JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named: "profileImage"), diameter: 30)
+        }
+        collectionView.reloadData()
+    }
     func observerMessages(){
         messageRef.observe(DataEventType.childAdded) { (snapShot) in
             if let dic = snapShot.value as? [String : AnyObject] {
                 let mediaType = dic["Media"] as! String
                 let senderId = dic["senderId"] as! String
                 let displayName = dic["senderDisplayName"] as? String
+                self.observeUser(id:senderId)
                 
                 switch mediaType {
                 case "TEXT" :
@@ -82,7 +107,8 @@ class ChattingRoomViewController: JSQMessagesViewController {
     }
         
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
+        let message = messages[indexPath.item]
+        return avatarDic[message.senderId]
     }
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         let newmessages = messageRef.childByAutoId()

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import FirebaseAuth
 import GoogleSignIn
+import FirebaseDatabase
 class Helper {
     static let helper = Helper()
     
@@ -18,7 +19,8 @@ class Helper {
         Auth.auth().signInAnonymously { (user, error) in
             if error == nil {
                 print(user?.uid)
-                
+                let newUser = Database.database().reference().child("Users").child(user!.uid)
+                newUser.setValue(["DisplayName" : "Anonymous" , "id" : "\(user!.uid)" , "photoUrl" : ""])
                 //switch to chat room
                self.switchToChatController()
             } else {
@@ -40,7 +42,8 @@ class Helper {
                 print(error.localizedDescription)
                 return
             } else {
-                print("sign in successfuly\(user?.email) \(user?.displayName)")
+                let newUser = Database.database().reference().child("Users").child(user!.uid)
+                newUser.setValue(["DisplayName" : "\(user!.displayName!)" , "id" : "\(user!.uid)" , "photoUrl" : "\(user!.photoURL!)"])
                 self.switchToChatController()
             }
         }
